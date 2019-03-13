@@ -6,8 +6,8 @@ import (
 	"io"
 	"strings"
 
-	"vimagination.zapto.org/errors"
-	"vimagination.zapto.org/parser"
+	"github.com/MJKWoolnough/errors"
+	"github.com/MJKWoolnough/parser"
 )
 
 // Calendar represents a iCalendar object

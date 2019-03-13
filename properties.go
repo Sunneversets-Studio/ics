@@ -5,8 +5,8 @@ package ics
 import (
 	"strings"
 
-	"vimagination.zapto.org/errors"
-	"vimagination.zapto.org/parser"
+	"github.com/MJKWoolnough/errors"
+	"github.com/MJKWoolnough/parser"
 )
 
 // PropAction defines the action to be invoked when an alarm is triggered

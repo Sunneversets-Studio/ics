@@ -9,8 +9,8 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"vimagination.zapto.org/errors"
-	"vimagination.zapto.org/parser"
+	"github.com/MJKWoolnough/errors"
+	"github.com/MJKWoolnough/parser"
 )
 
 const dateTimeFormat = "20060102T150405Z"

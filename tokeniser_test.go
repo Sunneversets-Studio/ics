@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"vimagination.zapto.org/parser"
+	"github.com/MJKWoolnough/parser"
 )
 
 func TestTokeniser(t *testing.T) {

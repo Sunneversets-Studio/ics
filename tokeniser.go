@@ -3,8 +3,8 @@ package ics
 import (
 	"io"
 
-	"vimagination.zapto.org/errors"
-	"vimagination.zapto.org/parser"
+	"github.com/MJKWoolnough/errors"
+	"github.com/MJKWoolnough/parser"
 )
 
 const (

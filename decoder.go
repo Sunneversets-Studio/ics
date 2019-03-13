@@ -1,5 +1,5 @@
 // Package ics implements an encoder and decoder for iCalendar files
-package ics // import "vimagination.zapto.org/ics"
+package ics // import "github.com/MJKWoolnough/ics"
 
 import (
 	"io"

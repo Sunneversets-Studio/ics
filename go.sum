@@ -1,0 +1,6 @@
+github.com/MJKWoolnough/errors v0.0.0-20180612134010-ee619f2978f6 h1:HDQ8Xophc69hQpG50BBrIe23BPRgtoeTpy55CXX2idU=
+github.com/MJKWoolnough/errors v0.0.0-20180612134010-ee619f2978f6/go.mod h1:8l9ImG2GFB+vsZ679hAVEJ5JVHMxITLnt4Jg7RV3OFw=
+github.com/MJKWoolnough/parser v0.0.0-20180612140807-472a2e665c98 h1:FuD72FM5Pre27Tzaw2IZ9lZgzzwHabmbsFSfw5ns74I=
+github.com/MJKWoolnough/parser v0.0.0-20180612140807-472a2e665c98/go.mod h1:aMEP9QDlNM9aTBCp8WNcCrjBmR8PvkAqvZjktzR7JQM=
+vimagination.zapto.org/parser v0.0.0-20180612140807-472a2e665c98 h1:2sG4oBE6cT4KdAzyHx0tDQIzIIO0DXJ31pS/IiHe55c=
+vimagination.zapto.org/parser v0.0.0-20180612140807-472a2e665c98/go.mod h1:WT+8/T+qTZDNVO5GcXv8pWSn7AIWakJZWMN1mL662WY=
