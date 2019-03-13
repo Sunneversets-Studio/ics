@@ -3020,6 +3020,11 @@ func (p *PropURL) valid() error {
 // is required in order to interpret the iCalendar object
 type PropVersion Text
 
+const (
+	Version1 PropVersion = "1.0"
+	Version2 PropVersion = "2.0"
+)
+
 func (p *PropVersion) decode(params []parser.Token, value string) error {
 	oParams := make(map[string]string)
 	var ts []string

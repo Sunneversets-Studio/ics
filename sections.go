@@ -5,6 +5,7 @@ package ics
 import (
 	"io"
 	"strings"
+	"time"
 
 	"github.com/MJKWoolnough/errors"
 	"github.com/MJKWoolnough/parser"
@@ -19,6 +20,24 @@ type Calendar struct {
 	Journal   []Journal
 	FreeBusy  []FreeBusy
 	Timezone  []Timezone
+}
+
+func NewCalendar() *Calendar {
+	return &Calendar{
+		Version: Version2,
+	}
+}
+
+func (s *Calendar) SetProductID(productID string) {
+	s.ProductID = PropProductID(productID)
+}
+
+func (s *Calendar) AddTimezone(timezone Timezone) {
+	s.Timezone = append(s.Timezone, timezone)
+}
+
+func (s *Calendar) AddEvent(event Event) {
+	s.Event = append(s.Event, event)
 }
 
 func (s *Calendar) decode(t tokeniser) error {
@@ -190,6 +209,59 @@ type Event struct {
 	Resources           []PropResources
 	RecurrenceDateTimes []PropRecurrenceDateTimes
 	Alarm               []Alarm
+}
+
+func NewEvent(uid string, timeStamp time.Time) Event {
+	return Event{
+		DateTimeStamp: PropDateTimeStamp{timeStamp},
+		UID:           PropUID(uid),
+	}
+}
+
+func (s *Event) SetSummary(summary string) {
+	s.Summary = &PropSummary{
+		Text: Text(summary),
+	}
+}
+
+func (s *Event) SetLocation(location string) {
+	s.Location = &PropLocation{
+		Text: Text(location),
+	}
+}
+
+func (s *Event) SetDescription(description string) {
+	s.Description = &PropDescription{
+		Text: Text(description),
+	}
+}
+
+func (s *Event) SetRecurrenceRule(frequency Frequency, until time.Time, isDateTime bool) {
+	s.RecurrenceRule = (*PropRecurrenceRule)(&Recur{
+		Frequency: frequency,
+		Until:     until,
+		UntilTime: isDateTime,
+	})
+}
+
+func (s *Event) SetDateTimeStart(dateTime time.Time, isDateTime bool) {
+	dateTimeStart := &PropDateTimeStart{}
+	if isDateTime {
+		dateTimeStart.DateTime = &DateTime{dateTime}
+	} else {
+		dateTimeStart.Date = &Date{dateTime}
+	}
+	s.DateTimeStart = dateTimeStart
+}
+
+func (s *Event) SetDateTimeEnd(dateTime time.Time, isDateTime bool) {
+	dateTimeEnd := &PropDateTimeEnd{}
+	if isDateTime {
+		dateTimeEnd.DateTime = &DateTime{dateTime}
+	} else {
+		dateTimeEnd.Date = &Date{dateTime}
+	}
+	s.DateTimeEnd = dateTimeEnd
 }
 
 func (s *Event) decode(t tokeniser) error {
@@ -1904,6 +1976,13 @@ type Timezone struct {
 	Daylight     []Daylight
 }
 
+func NewTimezone(timezoneID string, standards ...Standard) Timezone {
+	return Timezone{
+		TimezoneID: PropTimezoneID(timezoneID),
+		Standard:   standards,
+	}
+}
+
 func (s *Timezone) decode(t tokeniser) error {
 	var requiredTimezoneID bool
 Loop:
@@ -2030,6 +2109,20 @@ type Standard struct {
 	Comment             []PropComment
 	RecurrenceDateTimes []PropRecurrenceDateTimes
 	TimezoneName        []PropTimezoneName
+}
+
+func NewStandard(start time.Time, isDateTime bool, offsetToHour, offsetFromHour float64) Standard {
+	timeStart := PropDateTimeStart{}
+	if isDateTime {
+		timeStart.DateTime = &DateTime{start}
+	} else {
+		timeStart.Date = &Date{start}
+	}
+	return Standard{
+		DateTimeStart:      timeStart,
+		TimezoneOffsetFrom: PropTimezoneOffsetFrom(offsetFromHour * 3600),
+		TimezoneOffsetTo:   PropTimezoneOffsetTo(offsetToHour * 3600),
+	}
 }
 
 func (s *Standard) decode(t tokeniser) error {
