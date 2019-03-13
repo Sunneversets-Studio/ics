@@ -1333,6 +1333,8 @@ func (u UTCOffset) encode(w writer) {
 	if o < 0 {
 		b = append(b, '-')
 		o = -o
+	} else {
+		b = append(b, '+')
 	}
 	s := byte(o % 60)
 	o /= 60
