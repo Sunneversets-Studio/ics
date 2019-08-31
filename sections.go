@@ -264,6 +264,26 @@ func (s *Event) SetDateTimeEnd(dateTime time.Time, isDateTime bool) {
 	s.DateTimeEnd = dateTimeEnd
 }
 
+func (s *Event) AddExceptionDateTime(dateTime time.Time, isDateTime bool) {
+	exceptionDateTime := PropExceptionDateTime{}
+	if isDateTime {
+		exceptionDateTime.DateTime = &DateTime{dateTime}
+	} else {
+		exceptionDateTime.Date = &Date{dateTime}
+	}
+	s.ExceptionDateTime = append(s.ExceptionDateTime, exceptionDateTime)
+}
+
+func (s *Event) AddRecurrenceDateTimes(dateTime time.Time, isDateTime bool) {
+	recurrenceDateTimes := PropRecurrenceDateTimes{}
+	if isDateTime {
+		recurrenceDateTimes.DateTime = &DateTime{dateTime}
+	} else {
+		recurrenceDateTimes.Date = &Date{dateTime}
+	}
+	s.RecurrenceDateTimes = append(s.RecurrenceDateTimes, recurrenceDateTimes)
+}
+
 func (s *Event) decode(t tokeniser) error {
 	var requiredDateTimeStamp, requiredUID bool
 Loop:
